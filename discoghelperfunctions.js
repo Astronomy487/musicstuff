@@ -2,26 +2,46 @@
 //# sourceMappingURL=smartquotes.js.map
 // ^^ taken from smartquotes.js.org !!! Thank you to smart people who have solved the problem of formatting apostrophes
 
+function colorLightness(colorHexString) {
+	return [
+		colorHexString.substring(1,3),
+		colorHexString.substring(3,5),
+		colorHexString.substring(5,7)
+	].map(x => parseInt(x, 16)).reduce((a, b) => a+b, 0);
+	//if background colorLightness > 200, you should use black ui on top
+}
 
-function navFromUrls(...urlSetsToTake) { //parameters go from low to high priority
+function navFromUrls(urlSetsToTake, forceColor = undefined) { //parameters go from low to high priority
+	if (!Array.isArray(urlSetsToTake)) urlSetsToTake = [urlSetsToTake];
 	let url = {};
-	for (let u of urlSetsToTake) for (let k in u) url[k] = u[k];
+	for (let u of urlSetsToTake) for (let k in u) if (k != "YouTube Full Mix") url[k] = u[k];
+	if (urlSetsToTake[urlSetsToTake.length-1]["YouTube Full Mix"])
+		url["YouTube Full Mix"] = urlSetsToTake[urlSetsToTake.length-1]["YouTube Full Mix"];
 	let nav = document.createElement("nav");
 	let done = 0;
-	for (let platform of Object.keys(url).sort()) {
+	for (let platform of sortSocialKeys(Object.keys(url))) {
 		if (!url[platform].length) continue;
 		//if (done) nav.appendChild(document.createTextNode(", "));
 		let a = nav.appendChild(document.createElement("a"));
 		//a.innerHTML = platform.replaceAll(" ", "&nbsp;");
 		let img = a.appendChild(document.createElement("img"));
+		
 		let src = "https://astronomy487.com/socialicons/colors/"+platform.toLowerCase().replaceAll(" ", "")+".png";
+		
 		img.src = src;
 		a.onmouseenter = function() {
-			img.src = src.replace("colors", "white");
+			if (forceColor)
+				img.src = src.replace("/colors/", forceColor);
+			else
+				img.src = src.replace("/colors/", "/white/");
 		}
 		a.onmouseleave = function() {
-			img.src = src
+			if (forceColor)
+				img.src = src.replace("/colors/", forceColor);
+			else
+				img.src = src;
 		}
+		if (forceColor) a.onmouseleave();
 		a.target = "_blank";
 		a.href = url[platform];
 		a.title = platform;
@@ -29,6 +49,15 @@ function navFromUrls(...urlSetsToTake) { //parameters go from low to high priori
 	}
 	if (!done) nav.innerHTML = "<span style=\"color: var(--med);\">No links provided</span>";
 	return nav;
+}
+
+function sortSocialKeys(keys) {
+	//put them into a preferred order
+	let anew = [];
+	for (let service of ["Bandcamp", "YouTube", "YouTube Full Mix", "Apple Music", "Spotify", "Soundcloud", "Amazon Music"])
+		if (keys.includes(service)) anew.push(service);
+	return anew;
+	return keys.sort();
 }
 
 function formatSongTitle(song, artistMandatory = false) {

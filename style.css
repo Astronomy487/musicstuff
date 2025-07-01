@@ -1,0 +1,140 @@
+:root {
+	--bg: black;
+	--fg: white;
+	--acc: yellow;
+}
+
+body {
+	background: var(--bg);
+	color: var(--fg);
+	width: 28rem;
+	margin: 4rem auto;
+	line-height: 125%;
+	font-family: 'Inter', sans-serif;
+	letter-spacing: -0.03125em;
+	font-feature-settings: 'cv02' 1,'cv03' 1,'cv04' 1, 'cv09' 1, 'cv05' 1, 'ss07' 1, 'ss08' 1, 'cv08' 1, 'cv10' 1;
+	font-size: 1rem;
+}
+
+@media only screen and (max-device-width: 480px) {
+	html {
+		font-size: 3.5vw;
+	}
+	body {
+		width: calc(100% - 3rem);
+		margin: 1.5rem;
+	}
+}
+
+h1 {
+	color: var(--acc);
+	font-weight: bold;
+	font-size: 2rem;
+	margin: 0;
+	margin-top: 1.5rem;
+	line-height: 100%;
+}
+
+::selection {
+	background: var(--acc);
+	color: var(--bg);
+}
+
+img {
+	width: 100%;
+	user-select: none;
+}
+
+table {
+	table-layout: fixed;
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1rem 0;
+}
+
+td {
+	border: 0 solid transparent;
+	background-clip: padding-box;
+}
+
+tr > td + td {
+  border-left-width: 0.25rem;
+}
+
+tr + tr > td {
+  border-top-width: 0.25rem;
+}
+
+td {
+	padding: 0;
+}
+
+a.youtube {--acc: #ff0000;}
+a.youtubefullmix {--acc: #ff0000;}
+a.bandcamp {--acc: #1DA0C3;}
+a.applemusic {--acc: #FA3E57;}
+a.spotify {--acc: #1ED760;}
+a.soundcloud {--acc: #FF5001;}
+a.amazonmusic {--acc: #25D3DA;}
+
+a {
+	width: 100%;
+	display: inline-block;
+	box-sizing: border-box;
+	cursor: pointer;
+	user-select: none;
+	border: solid 0.0625rem transparent;
+	height: 3.125rem;
+}
+
+a img {
+	width: 2rem;
+	vertical-align: middle;
+	padding: 0.5rem;
+	padding-right: 0;
+}
+a span {
+	vertical-align: middle;
+	width: calc(100% - 2.5rem);
+	text-align: center;
+	display: inline-block;
+}
+
+/* mode-dark - for near-black backgrounds */
+.mode-dark a {
+	background: none;
+	color: white;
+	border-color: var(--acc);
+}
+.mode-dark a:hover {
+	background: var(--acc);
+	color: white;
+}
+.mode-dark a.spotify:hover, .mode-dark a.amazonmusic:hover {
+	color: black;
+}
+
+/* mode-black - force all elements to be black for a light background */
+.mode-black a {
+	background: none;
+	color: black;
+	border-color: black;
+}
+.mode-black a:hover {
+	background: black;
+	color: var(--acc);
+}
+
+/* mode-light - for super light backgrounds */
+.mode-light a {
+	background: none;
+	color: black;
+	border-color: var(--acc);
+}
+.mode-light a:hover {
+	background: var(--acc);
+	color: white;
+}
+.mode-light a.spotify:hover, .mode-light a.amazonmusic:hover {
+	color: black;
+}

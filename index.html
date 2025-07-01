@@ -5,6 +5,17 @@
 	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 	<link rel="stylesheet" href="discogcss.css">
 	<link rel="icon" href="favicon.png">
+	<meta name="theme-color" content="#000000">
+	<link rel="canonical" href="https://music.astronomy487.com">
+	<meta name="description" content="">
+	<meta name="og:description" content="">
+	<meta name="keywords" content="electronic, dance, music, astro, artist, indie, edm">
+	<meta name="author" content="Astro, astronomy487">
+	<meta name="robots" content="index, follow">
+	<meta property="og:site_name" content="astronomy487.com">
+	<meta property="og:title" content="Astro">
+	<meta property="og:image" content="squarelogo.png">
+	<meta property="og:url" content="https://music.astronomy487.com">
 	<title>Astro</title>
 	<style>
 		html {
@@ -34,9 +45,10 @@
 			border-left: solid 0.125rem var(--line);
 			opacity: 0;
 			display: none;
-			transition: 0.2s opacity;
+			transition: 0.2s opacity, 0.2s background;
 			height: calc(100vh - 0rem);
-			background: black;
+			background: var(--bg);
+			color: var(--fg);
 			top: 0;
 		}
 		.inspect > div {
@@ -52,6 +64,10 @@
 		.inspect h2 {
 			line-height: 100%;
 			margin: 0;
+			color: var(--acc);
+		}
+		.inspect[palette="true"] h2 span {
+			color: inherit;
 		}
 		.inspect-artwork {
 			width: 6rem;
@@ -125,7 +141,7 @@
 		}
 		
 		.lyrics {
-			max-height: 16rem;
+			max-height: 10rem;
 			overflow-y: scroll;
 			border: solid 0.125rem var(--line);
 			width: 100%;
@@ -233,8 +249,36 @@
 			border-bottom: solid 0.125rem var(--line);
 		}
 		
-		/* #histogram img {border-radius: 0.25rem;}
-		img, iframe, header, .lyrics {border-radius: 0.5rem;} */
+		#other-stuff {
+			margin-bottom: 16rem;
+		}
+		#other-stuff h2 {
+			font-size: 1.5rem;
+			color: var(--med);
+			margin-top: 4rem;
+			margin-bottom: 1rem;
+		}
+		.other-stuff-entry {
+			display: inline-block;
+			width: 8rem;
+			margin-right: 1rem;
+			vertical-align: top;
+			margin-top: 2rem;
+		}
+		.other-stuff-entry-image {
+			width: 100%;
+		}
+		.other-stuff-entry .info span {
+			color: var(--med);
+			font-size: 0.875em;
+			display: block;
+			margin-top: 0.25rem;
+		}
+		.other-stuff-entry .info div {
+			height: 5rem;
+		}
+		.other-stuff-entry .info nav {
+		}
 	</style>
 </head>
 <body>
@@ -257,6 +301,9 @@
 		<div id="output"></div>
 		<div style="margin-top: 5rem;">Histogram of music published</div>
 		<div id="histogram" style="position: relative; height: 22rem; margin-top: 4rem; margin-bottom: 16rem;"></div>
+		<div id="other-stuff">
+			<div>Other music I've been involved with that you should totally listen to</div>
+		</div>
 	</main>
 	<div class="inspect"><div></div></div>
 	<script src="discog.js"></script>
@@ -430,8 +477,6 @@
 			let div = document.querySelector(".inspect > div");
 			div.style.animation = "0.2s inspect-out";
 			if (!song) document.querySelector(".inspect").style.opacity = "0";
-			if (!song) document.title = "Astro";
-			if (song) document.title = formatSongTitle(song, true);
 			if (!song) setTimeout(function(){
 				//while (document.querySelector(".inspect>div").firstChild) document.querySelector(".inspect>div").firstChild.remove();
 				setTimeout(function(){
@@ -465,8 +510,7 @@
 				setTextWithParentheses(td.appendChild(document.createElement("h2")), song, false, false);
 				
 				let essentialInfo = [];
-				//essentialInfo.push("Released " + formatDate(song.released || album.released));
-				essentialInfo.push(formatDuration(song.length)+"&emsp;Released " + formatDate(song.released || album.released));
+				essentialInfo.push("<span style=\"margin-right: 1.5rem;\">"+formatDate(song.released || album.released)+"</span>" + formatDuration(song.length));
 				if (album) essentialInfo.push((song.bonus ? "Bonus track" : "Track "+(1+album.songs.indexOf(song)))+" on " + smartquotes(album.title));
 				//essentialInfo.push(formatDuration(song.length));
 				
@@ -474,7 +518,39 @@
 				essentialInfoDiv.style.marginTop = "0.5rem";
 				essentialInfoDiv.innerHTML = essentialInfo.join("<br>");
 				
-				essentialInfoDiv.appendChild(navFromUrls(album?{"Bandcamp": album.url["Bandcamp"]}:{}, song.url));
+				//handle color
+				let inspectStyle = document.querySelector(".inspect").style;
+				let forceColor = undefined;
+				if ((album && album.color) || (song.color)) {
+					let bg;
+					let fg;
+					let acc;
+					if (song.color) {
+						bg = song.color.bg;
+						fg = song.color.fg;
+						acc = song.color.acc;
+					} else if (album && album.color) {
+						bg = album.color.bg;
+						fg = album.color.fg;
+						acc = album.color.acc;
+					}
+					inspectStyle.setProperty("--bg", bg);
+					inspectStyle.setProperty("--fg", fg);
+					inspectStyle.setProperty("--med", fg+"88");
+					inspectStyle.setProperty("--line", fg+"44");
+					inspectStyle.setProperty("--acc", acc);
+					document.querySelector(".inspect").setAttribute("palette", "true");
+					if (colorLightness(bg) > 200) forceColor = "/black/";
+				} else {
+					inspectStyle.setProperty("--bg", "inherit");
+					inspectStyle.setProperty("--fg", "inherit");
+					inspectStyle.setProperty("--med", "inherit");
+					inspectStyle.setProperty("--line", "inherit");
+					inspectStyle.setProperty("--acc", "inherit");
+					document.querySelector(".inspect").setAttribute("palette", "false");
+				}
+				
+				essentialInfoDiv.appendChild(navFromUrls([album?album.url:{}, song.url], forceColor));
 				
 				if (song.url && song.url["YouTube"]) {
 					let iframe = div.appendChild(document.createElement("iframe"));
@@ -646,6 +722,7 @@
 				"Bandcamp": "https://astronomy487.bandcamp.com",
 				"Spotify": "https://open.spotify.com/artist/2ajNTg6axZGx5gFZF0Upb5",
 				"YouTube": "https://youtube.com/astronomy487",
+				"Discord": "https://discord.gg/ZnMsetP",
 				"Twitter": "https://twitter.com/astronomy487"
 			});
 			nav.setAttribute("class", "center");
@@ -739,6 +816,133 @@
 				img.style.verticalAlign = "middle";
 			}
 		} */
+		
+		let otherStuffDiv = document.querySelector("#other-stuff");
+		for (let entry of [
+			{
+				title: "A Lucky Dog Christmas",
+				released: "2022-12-21",
+				artwork: "https://f4.bcbits.com/img/a4014819160_10.jpg",
+				url: {
+					"Bandcamp": "https://luckydogwarehouse.bandcamp.com/album/lucky-dog-warehouse-presents-a-lucky-dog-christmas"
+				}
+			},
+			{
+				title: "LUCKY DOG WINTER TAPE 02",
+				released: "2023-12-20",
+				artwork: "https://f4.bcbits.com/img/a3303709017_10.jpg",
+				url: {
+					"Bandcamp": "https://luckydogwarehouse.bandcamp.com/album/lucky-dog-winter-tape-02"
+				}
+			},
+			{
+				title: "Now That's What I Call Gay Jazz: Volume 2",
+				released: "2024-01-26",
+				artwork: "https://f4.bcbits.com/img/a3582282299_10.jpg",
+				url: {
+					"Bandcamp": "https://ionurl.bandcamp.com/album/now-thats-what-i-call-gay-jazz-volume-2"
+				}
+			},
+			{
+				title: "Now THAT'S What I Call Gay Jazz: Volume FOUR!!!",
+				released: "2024-07-26",
+				artwork: "https://f4.bcbits.com/img/a2969985701_10.jpg",
+				url: {
+					"Bandcamp": "https://ionurl.bandcamp.com/album/now-thats-what-i-call-gay-jazz-volume-four"
+				}
+			},
+			{
+				title: "NTWICGJV5",
+				released: "2024-11-03",
+				artwork: "https://f4.bcbits.com/img/a1828470196_10.jpg",
+				url: {
+					"Bandcamp": "https://ionurl.bandcamp.com/album/ntwicgjv5"
+				}
+			},
+			{
+				title: "NOW THAT'S WHAT I CALL GAY JAZZ: NUMBER 8",
+				released: "2025-06-08",
+				artwork: "https://f4.bcbits.com/img/a2021205164_10.jpg",
+				url: {
+					"Bandcamp": "https://ionurl.bandcamp.com/album/now-thats-what-i-call-gay-jazz-number-8"
+				}
+			},
+			{
+				title: "mason infinity – FLIGHT JACKET",
+				released: "2021-09-10",
+				artwork: "https://f4.bcbits.com/img/a2553085739_10.jpg",
+				url: {
+					"Bandcamp": "https://mason-infinity.bandcamp.com/album/flight-jacket"
+				}
+			},
+			{
+				title: "mason infinity – Lucky Lit Me On Fire",
+				released: "2024-11-22",
+				artwork: "https://f4.bcbits.com/img/a0373193099_10.jpg",
+				url: {
+					"Bandcamp": "https://masoninfinity.bandcamp.com/album/lucky-lit-me-on-fire"
+				}
+			},
+			{
+				title: "bandanabloom – MOTHER",
+				released: "2021-05-21",
+				artwork: "https://f4.bcbits.com/img/a3805151777_10.jpg",
+				url: {
+					"Bandcamp": "https://bandanabloom.bandcamp.com/album/mother"
+				}
+			},
+			{
+				title: "bandanabloom – Whatever Makes You Happy",
+				released: "2022-09-21",
+				artwork: "https://f4.bcbits.com/img/a3891157549_10.jpg",
+				url: {
+					"Bandcamp": "https://bandanabloom.bandcamp.com/album/whatever-makes-you-happy"
+				}
+			},
+			{
+				title: "maxredsoldier, Drew Empire – abc123",
+				released: "2025-06-19",
+				artwork: "https://t2.genius.com/unsafe/344x344/https%3A%2F%2Fimages.genius.com%2F05313d509918589e95e5aae3475bdad9.500x500x1.png",
+				url: {
+					"YouTube": "https://www.youtube.com/watch?v=eez0d5neQTg"
+				}
+			},
+			{
+				title: "bandanabloom – EARTHQUAKE",
+				released: "2021-07-22",
+				artwork: "https://t2.genius.com/unsafe/344x344/https%3A%2F%2Fimages.genius.com%2Fd5a4aa1476114e9323404864c5680b99.640x640x1.jpg",
+				url: {}
+			},
+			{
+				title: "bandanabloom, REY GWEN – POWER POLE (Extended)",
+				released: "2021-10-01",
+				artwork: "https://t2.genius.com/unsafe/344x344/https%3A%2F%2Fimages.genius.com%2Fe15d2266ac6c8aa4b0267f45f4735fef.1000x1000x1.jpg",
+				url: {}
+			},
+			{
+				title: "bandanabloom, blackwinterwells, mason infinity – poltergeist",
+				released: "2021-09-12",
+				artwork: "https://t2.genius.com/unsafe/344x344/https%3A%2F%2Fimages.genius.com%2F5aeb0706f74520c3b82b54214f35705d.1000x1000x1.jpg",
+				url: {}
+			},
+			{
+				title: "inci0 – Team",
+				released: "2022-01-22",
+				artwork: "https://t2.genius.com/unsafe/344x344/https%3A%2F%2Fimages.genius.com%2Fffcfa996575690a4824603116841b9b0.1000x1000x1.jpg",
+				url: {}
+			}
+		].sort((a,b) => a.released < b.released ? 1 : -1)) {
+			let div = otherStuffDiv.appendChild(document.createElement("div"));
+			div.setAttribute("class", "other-stuff-entry");
+			let img = div.appendChild(document.createElement("img"));
+			img.setAttribute("class", "other-stuff-entry-image");
+			img.src = entry.artwork.replace("_10", "_4");
+			let info = div.appendChild(document.createElement("div"));
+			info.setAttribute("class", "info");
+			info.appendChild(document.createElement("span")).innerText = formatDate(entry.released);
+			info.appendChild(document.createElement("div")).innerText = entry.title;
+			//info.appendChild(navFromUrls(entry.url));
+		}
 	</script>
 </body>
 </html>
