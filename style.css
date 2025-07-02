@@ -36,7 +36,7 @@ h1 {
 }
 
 ::selection {
-	background: var(--acc);
+	background: var(--fg);
 	color: var(--bg);
 }
 
@@ -103,7 +103,7 @@ a span {
 /* mode-dark - for near-black backgrounds */
 .mode-dark a {
 	background: none;
-	color: white;
+	color: var(--fg);
 	border-color: var(--acc);
 }
 .mode-dark a:hover {
@@ -128,7 +128,7 @@ a span {
 /* mode-light - for super light backgrounds */
 .mode-light a {
 	background: none;
-	color: black;
+	color: var(--fg);
 	border-color: var(--acc);
 }
 .mode-light a:hover {
