@@ -11,7 +11,7 @@ function colorLightness(colorHexString) {
 	//if background colorLightness > 200, you should use black ui on top
 }
 
-function navFromUrls(urlSetsToTake, forceColor = undefined) { //parameters go from low to high priority
+function navFromUrls(urlSetsToTake, forceBlack = false) { //urlSetsToTake go from low to high priority
 	if (!Array.isArray(urlSetsToTake)) urlSetsToTake = [urlSetsToTake];
 	let url = {};
 	for (let u of urlSetsToTake) for (let k in u) if (k != "YouTube Full Mix") url[k] = u[k];
@@ -25,23 +25,8 @@ function navFromUrls(urlSetsToTake, forceColor = undefined) { //parameters go fr
 		let a = nav.appendChild(document.createElement("a"));
 		//a.innerHTML = platform.replaceAll(" ", "&nbsp;");
 		let img = a.appendChild(document.createElement("img"));
-		
-		let src = "https://astronomy487.com/socialicons/colors/"+platform.toLowerCase().replaceAll(" ", "")+".png";
-		
-		img.src = src;
-		a.onmouseenter = function() {
-			if (forceColor)
-				img.src = src.replace("/colors/", forceColor);
-			else
-				img.src = src.replace("/colors/", "/white/");
-		}
-		a.onmouseleave = function() {
-			if (forceColor)
-				img.src = src.replace("/colors/", forceColor);
-			else
-				img.src = src;
-		}
-		if (forceColor) a.onmouseleave();
+		img.src = "https://music.astronomy487.com/icons/"+platform.toLowerCase().replaceAll(" ", "")+".svg";
+		if (forceBlack) a.className = "black-on-hover";
 		a.target = "_blank";
 		a.href = url[platform];
 		a.title = platform;

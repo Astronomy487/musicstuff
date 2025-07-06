@@ -43,6 +43,12 @@ nav.center {
 nav.center a img {
 	margin: 0 0.5rem;
 }
+nav a:hover img {
+	filter: grayscale(100%) brightness(10000%);
+}
+nav a.black-on-hover img {
+	filter: brightness(0%);
+}
 nav {
 	text-align: left;
 	display: block;

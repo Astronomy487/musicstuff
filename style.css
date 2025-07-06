@@ -72,10 +72,12 @@ td {
 a.youtube {--acc: #ff0000;}
 a.youtubefullmix {--acc: #ff0000;}
 a.bandcamp {--acc: #1DA0C3;}
-a.applemusic {--acc: #FA3E57;}
+a.applemusic {--acc: #FF2950;}
 a.spotify {--acc: #1ED760;}
 a.soundcloud {--acc: #FF5001;}
 a.amazonmusic {--acc: #25D3DA;}
+a.tencentmusic {--acc: #1073F9;}
+a.iheartradio {--acc: #C6002B;}
 
 a {
 	width: 100%;
@@ -83,12 +85,15 @@ a {
 	box-sizing: border-box;
 	cursor: pointer;
 	user-select: none;
-	border: solid 0.0625rem transparent;
+	border: solid 0.0625rem var(--acc);
 	height: 3.125rem;
+	background: none;
+	color: var(--fg);
 }
 
 a img {
 	width: 2rem;
+	height: 2rem;
 	vertical-align: middle;
 	padding: 0.5rem;
 	padding-right: 0;
@@ -99,24 +104,22 @@ a span {
 	text-align: center;
 	display: inline-block;
 }
-
-/* mode-dark - for near-black backgrounds */
-.mode-dark a {
-	background: none;
-	color: var(--fg);
-	border-color: var(--acc);
-}
-.mode-dark a:hover {
+a:hover {
 	background: var(--acc);
 	color: white;
 }
-.mode-dark a.spotify:hover, .mode-dark a.amazonmusic:hover {
+a:hover img {
+	filter: grayscale(100%) brightness(10000%);
+}
+a.spotify:hover img, a.amazonmusic:hover img {
+	filter: brightness(0%);
+}
+a.spotify:hover, a.amazonmusic:hover {
 	color: black;
 }
 
 /* mode-black - force all elements to be black for a light background */
 .mode-black a {
-	background: none;
 	color: black;
 	border-color: black;
 }
@@ -124,17 +127,9 @@ a span {
 	background: black;
 	color: var(--acc);
 }
-
-/* mode-light - for super light backgrounds */
-.mode-light a {
-	background: none;
-	color: var(--fg);
-	border-color: var(--acc);
+.mode-black a img {
+	filter: brightness(0%);
 }
-.mode-light a:hover {
-	background: var(--acc);
-	color: white;
-}
-.mode-light a.spotify:hover, .mode-light a.amazonmusic:hover {
-	color: black;
+.mode-black a:hover img {
+	filter: none;
 }

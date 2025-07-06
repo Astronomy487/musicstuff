@@ -497,7 +497,6 @@
 				let escapeA = escape.appendChild(document.createElement("a"));
 				escapeA.innerText = "← Return to catalogue";
 				escapeA.onclick = function(){inspect();};
-				escape.style.color = "var(--med)";
 				
 				let tr = div.appendChild(document.createElement("table")).appendChild(document.createElement("tr"))
 				
@@ -520,7 +519,7 @@
 				
 				//handle color
 				let inspectStyle = document.querySelector(".inspect").style;
-				let forceColor = undefined;
+				let forceBlack = false;
 				if ((album && album.color) || (song.color)) {
 					let bg;
 					let fg;
@@ -540,7 +539,7 @@
 					inspectStyle.setProperty("--line", fg+"44");
 					inspectStyle.setProperty("--acc", acc);
 					document.querySelector(".inspect").setAttribute("palette", "true");
-					if (colorLightness(bg) > 200) forceColor = "/black/";
+					if (colorLightness(bg) > 200) forceBlack = true;
 				} else {
 					inspectStyle.setProperty("--bg", "inherit");
 					inspectStyle.setProperty("--fg", "inherit");
@@ -550,7 +549,7 @@
 					document.querySelector(".inspect").setAttribute("palette", "false");
 				}
 				
-				essentialInfoDiv.appendChild(navFromUrls([album?album.url:{}, song.url], forceColor));
+				essentialInfoDiv.appendChild(navFromUrls([album?album.url:{}, song.url], forceBlack));
 				
 				if (song.url && song.url["YouTube"]) {
 					let iframe = div.appendChild(document.createElement("iframe"));
@@ -917,12 +916,6 @@
 				title: "bandanabloom, REY GWEN – POWER POLE (Extended)",
 				released: "2021-10-01",
 				artwork: "https://t2.genius.com/unsafe/344x344/https%3A%2F%2Fimages.genius.com%2Fe15d2266ac6c8aa4b0267f45f4735fef.1000x1000x1.jpg",
-				url: {}
-			},
-			{
-				title: "bandanabloom, blackwinterwells, mason infinity – poltergeist",
-				released: "2021-09-12",
-				artwork: "https://t2.genius.com/unsafe/344x344/https%3A%2F%2Fimages.genius.com%2F5aeb0706f74520c3b82b54214f35705d.1000x1000x1.jpg",
 				url: {}
 			},
 			{
