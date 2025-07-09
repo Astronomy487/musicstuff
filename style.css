@@ -10,7 +10,7 @@ body {
 	width: 28rem;
 	margin: 4rem auto;
 	line-height: 125%;
-	font-family: 'Inter', sans-serif;
+	font-family: 'Inter', system-ui, sans-serif;
 	letter-spacing: -0.03125em;
 	font-feature-settings: 'cv02' 1,'cv03' 1,'cv04' 1, 'cv09' 1, 'cv05' 1, 'ss07' 1, 'ss08' 1, 'cv08' 1, 'cv10' 1;
 	font-size: 1rem;
@@ -46,10 +46,17 @@ img {
 }
 
 table {
-	table-layout: fixed;
-	width: 100%;
 	border-collapse: collapse;
 	margin: 1rem 0;
+}
+
+table:not(:has(a)) td {
+	padding-right: 2rem;
+}
+
+table:has(a) {
+	table-layout: fixed;
+	width: 100%;
 }
 
 td {

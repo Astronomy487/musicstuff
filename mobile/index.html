@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 	<link rel="stylesheet" href="../discogcss.css">
 	<link rel="icon" href="../favicon.png">
@@ -25,7 +26,22 @@
 		.album-art {
 			width: 100%;
 		}
+		h1 {
+			line-height: 130%;
+			margin: 0;
+			font-weight: 900;
+			font-size: 2rem;
+		}
+		h1 b {
+			font-weight: inherit;
+			background: var(--fg);
+			color: var(--bg);
+			padding: 0 0.5rem;
+			transform: rotate(-2.5deg);
+			display: inline-block;
+		}
 	</style>
+	<script src="../localizer.js"></script>
 </head>
 <body>
 	<script>
@@ -34,35 +50,19 @@
 			if (!isMobile) window.location.replace("../");
 		}
 	</script>
-	<main id="main">
-		<header>
-			<p id="bio">My name is Astro (f.k.a. Astronomy487). I am a <span id="myage" class="mono-numbers"></span>-year-old musician. I appreciate electronic music, math, and linguistics.</p>
-		</header>
-	</main>
+	<h1 explicittexttag="myName"></h1>
+	<p explicittexttag="downloadsStatement"></p>
+	<p explicittexttag="creativeCommonsStatement"></p>
+	<main id="main"></main>
 	<script src="../discog.js"></script>
 	<script src="../discoghelperfunctions.js"></script>
 	<script>
-		//stuff for the header
-		{
-			updateAge();
-			setInterval(updateAge, 31.5576);
-			function updateAge() {
-				myage.innerText = ((new Date() - new Date("Dec 5 2004"))/1000/60/60/24/365.25).toFixed(9);
-			}
-			bio.appendChild(document.createTextNode(" I have released "+discog.albums.length+" albums comprising "+discog.albums.map(x => x.songs.filter(b=>!b.bonus).length).reduce((a,b)=>a+b)+" songs, as well as "+discog.remixes.length+" remixes."));
-			let nav = navFromUrls({
-				"Apple Music": "https://music.apple.com/us/artist/astro/1468743818",
-				"Bandcamp": "https://astronomy487.bandcamp.com",
-				"Spotify": "https://open.spotify.com/artist/2ajNTg6axZGx5gFZF0Upb5",
-				"YouTube": "https://youtube.com/astronomy487",
-				"Twitter": "https://twitter.com/astronomy487"
-			});
-			nav.setAttribute("class", "center");
-			nav.style.marginTop = "1rem";
-			nav.style.marginBottom = "0";
-			bio.appendChild(nav);
+		for (let element of document.querySelectorAll("[explicittexttag]")) {
+			let key = element.getAttribute("explicittexttag");
+			if (key == "myName") element.innerHTML = localizer.getExplicit(key).replace("\n", "<br>");
+			else element.innerText = localizer.getExplicit(key);
+			if (localizer.rtl[language]) element.setAttribute("dir", "rtl");
 		}
-		
 		for (let album of discog.albums.concat().reverse()) {
 			let div = main.appendChild(document.createElement("div"));
 			div.setAttribute("class", "album");
@@ -74,7 +74,13 @@
 			nav.setAttribute("class", "right");
 			div.appendChild(document.createElement("h2")).innerText = album.title;
 			let comment = div.appendChild(document.createElement("div"));
-			comment.innerText = album.songs.filter(x => !x.bonus).length + " tracks, " + formatDuration(album.length) + "\n" + formatDate(album.released);
+			comment.style.marginTop = "0.25rem";
+			let span = comment.appendChild(document.createElement("span"));
+			localizer.formatTrackCount(span, album.songs.filter(x => !x.bonus).length);
+			span.style.marginRight = "1.5rem";
+			span = comment.appendChild(document.createElement("span"));
+			localizer.formatDuration(span, album.length);
+			localizer.formatDate(comment.appendChild(document.createElement("div")), album.released);
 			comment.style.color = "var(--med)";
 		}
 	</script>
