@@ -1,9 +1,8 @@
-
 :root {
 	--bg: #000;
 	--fg: #fff;
-	--med: #ffffff88;
-	--line: #ffffff44;
+	--med: #888;
+	--line: #444;
 	--link1: #08e;
 	--link2: #0af;
 }
@@ -17,7 +16,7 @@ body {
 	color: var(--fg);
 	text-align: left;
 	line-height: 125%;
-	font-family: 'Inter', sans-serif;
+	font-family: 'Inter', system-ui, sans-serif;
 	letter-spacing: -0.03125em;
 	font-feature-settings: 'cv02' 1,'cv03' 1,'cv04' 1, 'cv09' 1, 'cv05' 1, 'ss07' 1, 'ss08' 1, 'cv08' 1, 'cv10' 1;
 }

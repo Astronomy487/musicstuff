@@ -94,13 +94,3 @@ function ordinal(n) {
 	if (n%10 == 3) return n + "rd";
 	return n + "th";
 }
-
-function formatDuration(n) {
-	if (n < 60) return n + "s";
-	let sec = (n%60).toString().padStart(2, "0");
-	let min = Math.floor(n/60)%60;
-	if (n < 3600) return min + "m" + sec + "s";
-	min = min.toString().padStart(2, "0");
-	let hou = Math.floor(n/3600);
-	return hou + "h" + min + "m" + sec + "s";
-}
