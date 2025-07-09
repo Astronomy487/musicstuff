@@ -41,7 +41,6 @@
 			display: inline-block;
 		}
 	</style>
-	<script src="../localizer.js"></script>
 </head>
 <body>
 	<script>
@@ -50,19 +49,13 @@
 			if (!isMobile) window.location.replace("../");
 		}
 	</script>
-	<h1 explicittexttag="myName"></h1>
-	<p explicittexttag="downloadsStatement"></p>
-	<p explicittexttag="creativeCommonsStatement"></p>
+	<h1>My name is <b>Astro</b><br>This is my music</h1>
+	<p>16-bit 44.1kHz lossless downloads freely available on Bandcamp for all music</p>
+	<p>All music shared under CC BY-NC-SA 4.0 license</p>
 	<main id="main"></main>
 	<script src="../discog.js"></script>
 	<script src="../discoghelperfunctions.js"></script>
 	<script>
-		for (let element of document.querySelectorAll("[explicittexttag]")) {
-			let key = element.getAttribute("explicittexttag");
-			if (key == "myName") element.innerHTML = localizer.getExplicit(key).replace("\n", "<br>");
-			else element.innerText = localizer.getExplicit(key);
-			if (localizer.rtl[language]) element.setAttribute("dir", "rtl");
-		}
 		for (let album of discog.albums.concat().reverse()) {
 			let div = main.appendChild(document.createElement("div"));
 			div.setAttribute("class", "album");
@@ -76,11 +69,11 @@
 			let comment = div.appendChild(document.createElement("div"));
 			comment.style.marginTop = "0.25rem";
 			let span = comment.appendChild(document.createElement("span"));
-			localizer.formatTrackCount(span, album.songs.filter(x => !x.bonus).length);
+			span.innerText = album.songs.filter(x => !x.bonus).length + " tracks";
 			span.style.marginRight = "1.5rem";
 			span = comment.appendChild(document.createElement("span"));
-			localizer.formatDuration(span, album.length);
-			localizer.formatDate(comment.appendChild(document.createElement("div")), album.released);
+			span.innerText = new Intl.DurationFormat("en", {sytle: "short"}).format({seconds: album.length%60, minutes: Math.floor(album.length/60)%60, hours: Math.floor(album.length/3600)});
+			comment.appendChild(document.createElement("div")).innerText = formatDate(album.released);
 			comment.style.color = "var(--med)";
 		}
 	</script>
