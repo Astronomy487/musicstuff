@@ -5,6 +5,18 @@
 	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 	<link rel="stylesheet" href="../discogcss.css">
 	<link rel="icon" href="../favicon.png">
+	<meta name="theme-color" content="#000000">
+	<link rel="canonical" href="https://music.astronomy487.com">
+	<meta name="description" content="Astro (f.k.a. astronomy487) is an independent electronic dance music artist with a love for synthesizers and pop music.">
+	<meta name="og:description" content="Astro (f.k.a. astronomy487) is an independent electronic dance music artist with a love for synthesizers and pop music.">
+	<meta name="keywords" content="electronic, dance, music, astro, artist, indie, edm">
+	<meta name="author" content="Astro, astronomy487">
+	<meta name="robots" content="index, follow">
+	<meta property="og:site_name" content="astronomy487.com">
+	<meta property="og:title" content="Astro">
+	<meta property="og:image" content="squarelogo.png">
+	<link rel="apple-touch-icon" href="squarelogo.png">
+	<meta property="og:url" content="https://music.astronomy487.com">
 	<title>Astro</title>
 	<style>
 		html {
@@ -41,7 +53,7 @@
 			display: inline-block;
 		}
 	</style>
-	<script src="../localizer.js"></script>
+	<script src="../talktalk/talktalk.0.3.1.min.js" data-talktalk="../talktalk"></script>
 </head>
 <body>
 	<script>
@@ -50,19 +62,12 @@
 			if (!isMobile) window.location.replace("../");
 		}
 	</script>
-	<h1 explicittexttag="myName"></h1>
-	<p explicittexttag="downloadsStatement"></p>
-	<p explicittexttag="creativeCommonsStatement"></p>
+	<h1 data-talktalk="mynameis"></h1>
+	<p data-talktalk="mymusiccomment"></p>
 	<main id="main"></main>
 	<script src="../discog.js"></script>
 	<script src="../discoghelperfunctions.js"></script>
 	<script>
-		for (let element of document.querySelectorAll("[explicittexttag]")) {
-			let key = element.getAttribute("explicittexttag");
-			if (key == "myName") element.innerHTML = localizer.getExplicit(key).replace("\n", "<br>");
-			else element.innerText = localizer.getExplicit(key);
-			if (localizer.rtl[language]) element.setAttribute("dir", "rtl");
-		}
 		for (let album of discog.albums.concat().reverse()) {
 			let div = main.appendChild(document.createElement("div"));
 			div.setAttribute("class", "album");
@@ -70,17 +75,15 @@
 			img.setAttribute("class", "album-art");
 			img.src = album.artwork;
 			let nav = div.appendChild(navFromUrls(album.url));
-			nav.style.float = "right";
-			nav.setAttribute("class", "right");
-			div.appendChild(document.createElement("h2")).innerText = album.title;
+			nav.style.float = "inline-end";
+			div.appendChild(document.createElement("h2")).innerText = Talktalk.wrapInDirectionalMarkers(album.title);
 			let comment = div.appendChild(document.createElement("div"));
 			comment.style.marginTop = "0.25rem";
 			let span = comment.appendChild(document.createElement("span"));
-			localizer.formatTrackCount(span, album.songs.filter(x => !x.bonus).length);
-			span.style.marginRight = "1.5rem";
-			span = comment.appendChild(document.createElement("span"));
-			localizer.formatDuration(span, album.length);
-			localizer.formatDate(comment.appendChild(document.createElement("div")), album.released);
+			span.innerText = Talktalk.talk("trackcount", {n: album.songs.filter(x => !x.bonus).length});
+			span.style.marginInlineEnd = "1.5rem";
+			comment.appendChild(document.createElement("span")).innerText = Talktalk.duration(album.length).talk();
+			comment.appendChild(document.createElement("div")).innerText = Talktalk.talk(new Date(album.released.replaceAll("-", "/")));
 			comment.style.color = "var(--med)";
 		}
 	</script>

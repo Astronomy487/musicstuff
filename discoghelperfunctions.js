@@ -11,7 +11,7 @@ function colorLightness(colorHexString) {
 	//if background colorLightness > 200, you should use black ui on top
 }
 
-function navFromUrls(urlSetsToTake, forceBlack = false) { //urlSetsToTake go from low to high priority
+function navFromUrls(urlSetsToTake, logoMode) { //urlSetsToTake go from low to high priority
 	if (!Array.isArray(urlSetsToTake)) urlSetsToTake = [urlSetsToTake];
 	let url = {};
 	for (let u of urlSetsToTake) for (let k in u) if (k != "YouTube Full Mix") url[k] = u[k];
@@ -26,7 +26,7 @@ function navFromUrls(urlSetsToTake, forceBlack = false) { //urlSetsToTake go fro
 		//a.innerHTML = platform.replaceAll(" ", "&nbsp;");
 		let img = a.appendChild(document.createElement("img"));
 		img.src = "https://music.astronomy487.com/icons/"+platform.toLowerCase().replaceAll(" ", "")+".svg";
-		if (forceBlack) a.className = "black-on-hover";
+		if (logoMode) a.className = logoMode + "-on-hover";
 		a.target = "_blank";
 		a.href = url[platform];
 		a.title = platform;
@@ -60,6 +60,7 @@ function formatDate(str) {
 function setTextWithParentheses(div, song, artistMandatory, setInspectClick = true) {
 	let text = formatSongTitle(song, artistMandatory);
 	div.setAttribute("class", "song");
+	div.dir = "ltr";
 	if (setInspectClick) div.onclick = function() {inspect(song);}
 	let parens = 0;
 	let str = "";

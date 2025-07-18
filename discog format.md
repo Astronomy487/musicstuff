@@ -46,6 +46,8 @@ Color objects have just three properties, each of which are a string hex code (e
 - `fg`, the foreground
 - `acc`, the accent color
 
+colors have an optional fourth property, `mode`, one of "black" or "white". if present, colorful ui elements (namely logos of other services) should appear as black or white instead of in color. i only use this when the background is not sufficiently black (greater than like 25% brightness)
+
 the foreground and accent colors should appear on top of the background. the accent color should only be used for larger/bolder text. the foreground color and accent color should not appear on top of one another!
 
 the foreground and background colors have a contrast ratio of at least 4.5. the accent and background colors have a contrast ratio of at least 3. these meet the WCAG AA accessibility guidelines.

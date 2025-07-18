@@ -1,0 +1,24 @@
+{
+	"date:year": "numeric",
+	"date:month": "short",
+	"date:day": "numeric",
+	"duration:style": "narrow",
+	"mynameis": "Mi nombre es Astro\nEsta es mi música",
+	"mymusic": "Mi música",
+	"mymusiccomment": "Descargas sin pérdidas de 16 bits y 44,1 kHz disponibles gratuitamente en Bandcamp para toda la música\nToda la música compartida bajo la licencia CC BY-NC-SA 4.0",
+	"othermusic": "Otra música en la que he participado que deberías escuchar",
+	"returntocatalogue": "Volver al catálogo",
+	"lyrics": "Letras",
+	"samples": "Muestras",
+	"mixtracklist": "Lista de pistas del mix",
+	"bonustrackstatement": {
+		"singular": "Pista extra disponible al descargar en Bandcamp: %{list}",
+		"plural": "%{n} pistas extra disponibles al descargar en Bandcamp: %{list}"
+	},
+	"trackcount": {
+		"singular": "%{n} pista",
+		"plural": "%{n} pistas"
+	},
+	"albummembershipbonus": "Pista extra en %{album}",
+	"albummembership": "Pista %{n} en %{album}"
+}

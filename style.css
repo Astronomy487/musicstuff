@@ -33,6 +33,7 @@ h1 {
 	margin: 0;
 	margin-top: 1.5rem;
 	line-height: 100%;
+	font-family: 'InterDisplay', system-ui, sans-serif;
 }
 
 ::selection {
@@ -51,7 +52,7 @@ table {
 }
 
 table:not(:has(a)) td {
-	padding-right: 2rem;
+	padding-inline-end: 2rem;
 }
 
 table:has(a) {
@@ -65,7 +66,7 @@ td {
 }
 
 tr > td + td {
-  border-left-width: 0.25rem;
+  border-inline-start-width: 0.25rem;
 }
 
 tr + tr > td {
@@ -103,7 +104,7 @@ a img {
 	height: 2rem;
 	vertical-align: middle;
 	padding: 0.5rem;
-	padding-right: 0;
+	padding-inline-end: 0;
 }
 a span {
 	vertical-align: middle;
@@ -115,8 +116,12 @@ a:hover {
 	background: var(--acc);
 	color: white;
 }
+@keyframes icon-hover {
+	0% {scale: 1.12;}
+}
 a:hover img {
 	filter: grayscale(100%) brightness(10000%);
+	animation: 0.2s icon-hover;
 }
 a.spotify:hover img, a.amazonmusic:hover img {
 	filter: brightness(0%);
@@ -138,5 +143,21 @@ a.spotify:hover, a.amazonmusic:hover {
 	filter: brightness(0%);
 }
 .mode-black a:hover img {
+	filter: none;
+}
+
+/* mode-white - force all elements to be white for...also a light background.. */
+.mode-white a {
+	color: white;
+	border-color: white;
+}
+.mode-white a:hover {
+	background: white;
+	color: var(--acc);
+}
+.mode-white a img {
+	filter: grayscale(100%) brightness(10000%);
+}
+.mode-white a:hover img {
 	filter: none;
 }

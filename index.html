@@ -15,6 +15,7 @@
 	<meta property="og:site_name" content="astronomy487.com">
 	<meta property="og:title" content="Astro">
 	<meta property="og:image" content="squarelogo.png">
+	<link rel="apple-touch-icon" href="squarelogo.png">
 	<meta property="og:url" content="https://music.astronomy487.com">
 	<title>Astro</title>
 	<style>
@@ -25,12 +26,15 @@
 			margin: 0;
 			overflow-x: hidden;
 		}
+		:dir(rtl) body {
+			text-align: right;
+		}
 		main {
 			margin: 0;
 			width: 64rem;
 			position: absolute;
-			left: calc(50% - 32rem);
-			transition: 0.5s left;
+			inset-inline-start: calc(50% - 32rem);
+			transition: 0.5s inset-inline-start;
 			pointer-events: none;
 		}
 		main * {
@@ -39,10 +43,10 @@
 		.inspect {
 			position: fixed;
 			margin: 0;
-			left: calc(50% + 17rem);
+			inset-inline-start: calc(50% + 17rem);
 			width: calc(50% - 17rem);
-			padding-left: 2rem;
-			border-left: solid 0.125rem var(--line);
+			padding-inline-start: 2rem;
+			border-inline-start: solid 0.125rem var(--line);
 			opacity: 0;
 			display: none;
 			transition: 0.2s opacity, 0.2s background;
@@ -50,6 +54,12 @@
 			background: var(--bg);
 			color: var(--fg);
 			top: 0;
+		}
+		.inspect .escape a:before {
+			content: "← ";
+		}
+		:dir(rtl) .inspect .escape a:before {
+			content: "→ ";
 		}
 		.inspect > div {
 			position: absolute;
@@ -66,13 +76,16 @@
 			margin: 0;
 			color: var(--acc);
 		}
+		.inspect .parentheses {
+			font-size: inherit;
+		}
 		.inspect[palette="true"] h2 span {
 			color: inherit;
 		}
 		.inspect-artwork {
 			width: 6rem;
-			float: left;
-			margin-right: 1rem;
+			float: inline-start;
+			margin-inline-end: 1rem;
 		}
 		.inspect td:has(.inspect-artwork) {
 			width: 6rem;
@@ -96,22 +109,27 @@
 		.tracklist-container {
 			margin: 1rem 0;
 		}
+		.album-tile .additional-message {
+			color: var(--med);
+			font-size: 0.875rem;
+			line-height: 1rem;
+		}
 		.album-tile:first-child {
 			margin-top: 3rem;
 		}
 		.remix-tile {
 			display: inline-block;
-			border-left: solid 0.125rem var(--line);
+			border-inline-start: solid 0.125rem var(--line);
 			padding: 0;
-			padding-left: 0.5rem;
+			padding-inline-start: 0.5rem;
 			width: 19.7rem;
 			margin: 0.25rem 0.5rem;
 			vertical-align: top;
 		}
 		.remix-tile div {
-			float: right;
+			float: inline-end;
 			color: var(--med);
-			margin-left: 0.5rem;
+			margin-inline-start: 0.5rem;
 		}
 		.single-tile, .album-tile {
 			margin: 6rem 0;
@@ -125,7 +143,7 @@
 			display: inline-block;
 			background: #030;
 			color: var(--med);
-			margin-left: 0.5rem;
+			margin-inline-start: 0.5rem;
 			vertical-align: top;
 		}
 		h2 {
@@ -157,10 +175,10 @@
 		}
 		.lyrics p {
 			margin: 0;
-			margin-left: 1rem;
+			margin-inline-start: 1rem;
 		}
 		.lyrics p:first-letter {
-			margin-left: -1rem;
+			margin-inline-start: -1rem;
 		}
 		a[href] {
 			color: var(--link1);
@@ -184,27 +202,6 @@
 			font-size: 2.5rem;
 			font-weight: bold;
 		}
-		.birthday {
-			margin: 2rem 0;
-			height: 1.5rem;
-			position: relative;
-			display: none;
-		}
-		.birthday span {
-			z-index: 3;
-			position: absolute;
-			padding: 0 2rem;
-			left: 50%;
-			transform: translate(-50%, 0);
-		}
-		.birthday hr {
-			z-index: 2;
-			border: none;
-			background: linear-gradient(90deg, var(--line) 40%, #ffffff00 40% 60%, var(--line) 60%);
-			height: 0.125rem;
-			position: absolute;
-			width: 100%;
-		}
 		#rhombuses {
 			height: 100vh;
 			width: 100vw;
@@ -226,7 +223,7 @@
 		.other-stuff-entry {
 			display: inline-block;
 			width: 8rem;
-			margin-right: 1rem;
+			margin-inline-end: 1rem;
 			vertical-align: top;
 			margin-top: 2rem;
 		}
@@ -257,6 +254,9 @@
 			font-weight: 900;
 			text-shadow: 0.375rem 0.375rem var(--bg), 0 0 1rem var(--bg), 0 0 1.5rem var(--bg);
 		}
+		:dir(rtl) header h1 {
+			text-shadow: -0.375rem 0.375rem var(--bg), 0 0 1rem var(--bg), 0 0 1.5rem var(--bg);
+		}
 		header h1 b {
 			background: var(--fg);
 			color: var(--bg);
@@ -278,11 +278,8 @@
 			background: black;
 			color: white;
 		}
-		[explicittexttag][dir="rtl"] {
-			text-align: right;
-		}
 	</style>
-	<script src="localizer.js"></script>
+	<script src="talktalk/talktalk.0.3.1.min.js"></script>
 </head>
 <body>
 	<script>
@@ -293,23 +290,14 @@
 	</script>
 	<div style="position: absolute;"><div id="rhombuses"></div></div>
 	<main>
-		<header><h1 explicittexttag="myName"></h1></header>
-		<h1 style="margin-top: calc(100vh + 8rem);" id="explicit-text-my-music" explicittexttag="myMusic"></h1>
-		<div explicittexttag="downloadsStatement"></div>
-		<div explicittexttag="creativeCommonsStatement"></div>
+		<header><h1 data-talktalk="mynameis"></h1></header>
+		<h1 style="margin-top: calc(100vh + 8rem);" data-talktalk="mymusic"></h1>
+		<div data-talktalk="mymusiccomment"></div>
 		<br><br>
 		<div id="output"></div>
 		<div id="other-stuff" style="margin-top: 5rem;">
-			<div explicittexttag="otherMusicToCheckOut"></div>
+			<div data-talktalk="othermusic"></div>
 		</div>
-		<script>
-			for (let element of document.querySelectorAll("[explicittexttag]")) {
-				let key = element.getAttribute("explicittexttag");
-				if (key == "myName") element.innerHTML = localizer.getExplicit(key).replace("\n", "<br>");
-				else element.innerText = localizer.getExplicit(key);
-				if (localizer.rtl[language]) element.setAttribute("dir", "rtl");
-			}
-		</script>
 	</main>
 	<div class="inspect"><div></div></div>
 	<script src="discog.js"></script>
@@ -317,11 +305,19 @@
 	<script>
 		let events = [];
 		
+		function releasedStringToDate(released) {
+			let releaseYear = released.substring(0, 4);
+			let releaseMonth = released.substring(5, 7);
+			let releaseDay = released.substring(8, 10);
+			return new Date(parseInt(releaseYear), parseInt(releaseMonth)-1, parseInt(releaseDay));
+		}
+		
 		function addSimpleEvent(song) {
 			let div = document.createElement("div");
 			div.setAttribute("class", "remix-tile");
-			//if (song.released < "2017-12-05") div.style.width = "11.125rem";
-			localizer.formatDate(div.appendChild(document.createElement("div")), song.released);
+			if (song.released < "2018-04-20") div.style.width = "11.125rem";
+			//if (song.released < "2018-04-20") div.style.width = "14.375rem";
+			div.appendChild(document.createElement("div")).innerText = Talktalk.talk(releasedStringToDate(song.released));
 			let titleArea = div.appendChild(document.createElement("a"));
 			setTextWithParentheses(titleArea, song);
 			let event = {
@@ -361,7 +357,7 @@
 			if (lastInspected == song) return;
 			if (song && window.scrollY < document.body.getBoundingClientRect().height/2) window.scrollTo(0, document.body.getBoundingClientRect().height*2/3);
 			lastInspected = song;
-			document.querySelector("main").style.left = "calc(50% - 32rem - 17rem)";
+			document.querySelector("main").style.insetInlineStart = "calc(50% - 32rem - 17rem)";
 			inspectTransitioningRightNow = true;
 			let album = discog.albums.filter(x => x.songs.includes(song));
 			album = album.length ? album[0] : null;
@@ -374,7 +370,7 @@
 					document.querySelector(".inspect").style.display = "none";
 					while (document.querySelector(".inspect > div").firstChild) document.querySelector(".inspect > div").firstChild.remove();
 				}, 200);
-				document.querySelector("main").style.left = "calc(50% - 32rem)";
+				document.querySelector("main").style.insetInlineStart = "calc(50% - 32rem)";
 				inspectTransitioningRightNow = false;
 			}, 100);
 			if (song) setTimeout(function(){
@@ -386,7 +382,8 @@
 				
 				let escape = div.appendChild(document.createElement("div"));
 				let escapeA = escape.appendChild(document.createElement("a"));
-				escapeA.innerText = "← " + localizer.getExplicit("returnToCatalogue");
+				escapeA.innerText = Talktalk.talk("returntocatalogue");
+				escape.setAttribute("class", "escape");
 				escapeA.onclick = function(){inspect();};
 				
 				let tr = div.appendChild(document.createElement("table")).appendChild(document.createElement("tr"))
@@ -404,18 +401,27 @@
 				
 				let essentialInfoDivFirstLine = essentialInfoDiv.appendChild(document.createElement("div"));
 				let essentialInfoDivFirstLineFirstSpan = essentialInfoDivFirstLine.appendChild(document.createElement("span"));
-				localizer.formatDate(essentialInfoDivFirstLineFirstSpan, song.released || album.released);
-				essentialInfoDivFirstLineFirstSpan.style.marginRight = "1rem";
-				localizer.formatDuration(essentialInfoDivFirstLine.appendChild(document.createElement("span")), song.length);
+				essentialInfoDivFirstLineFirstSpan.innerText = Talktalk.talk(releasedStringToDate(song.released || album.released));
+				essentialInfoDivFirstLineFirstSpan.style.marginInlineEnd = "1rem";
+				let weirdMiddleSpan = essentialInfoDivFirstLine.appendChild(document.createElement("span"));
+				weirdMiddleSpan.style.userSelect = "none";
+				weirdMiddleSpan.innerText = " "; //weirdMiddleSpan exists to solve number rendering issue in arabic. okay
+				essentialInfoDivFirstLine.appendChild(document.createElement("span")).innerText = Talktalk.duration(song.length).talk();
+				
 				if (song.bonus) {
-					localizer.formatSongMembershipLineBonus(essentialInfoDiv.appendChild(document.createElement("div")), smartquotes(album.title));
+					essentialInfoDiv.appendChild(document.createElement("div")).innerText = Talktalk.talk("albummembershipbonus", {
+						album: Talktalk.wrapInDirectionalMarkers(smartquotes(album.title), "ltr")
+					});
 				} else if (album) {
-					localizer.formatSongMembershipLine(essentialInfoDiv.appendChild(document.createElement("div")), 1+album.songs.indexOf(song), smartquotes(album.title));
+					essentialInfoDiv.appendChild(document.createElement("div")).innerText = Talktalk.talk("albummembership", {
+						album: Talktalk.wrapInDirectionalMarkers(smartquotes(album.title), "ltr"),
+						n: 1+album.songs.indexOf(song)
+					});
 				}
 				
 				//handle color
 				let inspectStyle = document.querySelector(".inspect").style;
-				let forceBlack = false;
+				let logoMode = undefined;
 				if ((album && album.color) || (song.color)) {
 					let bg;
 					let fg;
@@ -435,7 +441,7 @@
 					inspectStyle.setProperty("--line", fg+"44");
 					inspectStyle.setProperty("--acc", acc);
 					document.querySelector(".inspect").setAttribute("palette", "true");
-					if (colorLightness(bg) > 200) forceBlack = true;
+					if (song.color && song.color.mode) logoMode = song.color.mode;
 				} else {
 					inspectStyle.setProperty("--bg", "inherit");
 					inspectStyle.setProperty("--fg", "inherit");
@@ -445,7 +451,7 @@
 					document.querySelector(".inspect").setAttribute("palette", "false");
 				}
 				
-				essentialInfoDiv.appendChild(navFromUrls([album?album.url:{}, song.url], forceBlack));
+				essentialInfoDiv.appendChild(navFromUrls([album?album.url:{}, song.url], logoMode));
 				
 				if (song.url && song.url["YouTube"]) {
 					let iframe = div.appendChild(document.createElement("iframe"));
@@ -482,13 +488,14 @@
 						if (c.length) {
 							lastParagraph = lyricsDiv.appendChild(document.createElement("p"));
 							lastParagraph.innerText = smartquotes(c).replace(" - ", " – ");
+							lastParagraph.dir = "ltr";
 						} else {
 							lastParagraph.style.marginBottom = "0.75em";
 						}
 				}
 				
-				if (song.lyrics) makeInfoBox(localizer.getExplicit("lyrics"), song.lyrics.split("\n"));
-				if (song.samples) makeInfoBox(song.artist ? localizer.getExplicit("samples") : localizer.getExplicit("mixTracklist"), song.samples);
+				if (song.lyrics) makeInfoBox(Talktalk.talk("lyrics"), song.lyrics.split("\n"));
+				if (song.samples) makeInfoBox(song.artist ? Talktalk.talk("samples") : Talktalk.talk("mixTracklist"), song.samples);
 			}, 190);
 		}
 		
@@ -513,24 +520,29 @@
 				img.src = album.artwork;
 				img.style.width = img.style.height = "19rem";
 				let h4 = td.appendChild(document.createElement("h4"));
-				localizer.formatTrackCount(h4.appendChild(document.createElement("span")), album.songs.filter(x => !x.bonus).length);
-				h4.querySelector("span").style.marginRight = "1rem";
-				localizer.formatDuration(h4.appendChild(document.createElement("span")), album.length);
+				h4.appendChild(document.createElement("span")).innerText = Talktalk.talk("trackcount", {n: album.songs.filter(x => !x.bonus).length});
+				h4.querySelector("span").style.marginInlineEnd = "1rem";
+				h4.appendChild(document.createElement("span")).innerText = Talktalk.duration(album.length).talk();
 			}
 			{
 				let td = tr.appendChild(document.createElement("td"));
 				let date = td.appendChild(document.createElement("span"));
-				date.style.float = "right";
+				date.style.float = "inline-end";
 				date.style.color = "var(--med)";
-				localizer.formatDate(date, album.released);
-				td.appendChild(document.createElement("h2")).innerText = smartquotes(album.title);
+				date.innerText = Talktalk.talk(releasedStringToDate(album.released));
+				let h2 = td.appendChild(document.createElement("h2"));
+				h2.innerText = smartquotes(album.title);
+				h2.dir = "ltr";
 				
 				let nav = td.appendChild(navFromUrls(album.url));
 				nav.style.marginTop = "1rem";
 				
 				if (album.about) {
-					for (let paragraph of album.about.split("\n\n")) {
-						td.appendChild(document.createElement("p")).innerHTML = smartquotes(paragraph);
+					let about = album.about.split("\n\n");
+					for (let paragraph of about) {
+						let p = td.appendChild(document.createElement("p"));
+						p.innerText = smartquotes(paragraph);
+						p.dir = "ltr";
 					}
 				}
 				
@@ -555,52 +567,40 @@
 					let tracklistTr = parent.appendChild(document.createElement("tr"));
 					
 					let tracklistTd = tracklistTr.appendChild(document.createElement("td"));
-					tracklistTd.innerText = localizer.processNumber(i+1, 2);
-					tracklistTd.style.paddingRight = "0.75rem";
+					tracklistTd.innerText = Talktalk.talk(i+1, {"number:minimumIntegerDigits": 2});
+					tracklistTd.style.paddingInlineEnd = "0.75rem";
 					tracklistTd.setAttribute("class", "mono-numbers");
 					tracklistTd = tracklistTr.appendChild(document.createElement("td"));
 					
 					let titleArea = tracklistTd.appendChild(document.createElement("a"));
 					setTextWithParentheses(titleArea, album.songs[i]);
 					
-					tracklistTd.style.paddingRight = "1rem";
+					tracklistTd.style.paddingInlineEnd = "1rem";
 					if (album.songs[i].bonus) tracklistTr.style.color = "var(--med)";
 				}
 				for (let c = 0; c < numberOfColumns; c++) {
 					for (let i = Math.ceil(c/numberOfColumns*numberOfSongsToDisplay); i < (c+1)/numberOfColumns*numberOfSongsToDisplay; i++) doTracklistItem(tracklists[c], i);
 				}
+				
 				let numberOfBonusTracks = album.songs.filter(x => x.bonus).length;
 				if (numberOfBonusTracks) {
 					let p = td.appendChild(document.createElement("p"));
-					p.style.color = "var(--med)";
+					p.setAttribute("class", "additional-message");
 					
-					p.innerText = localizer.getExplicit("bonusTrackStatement" + (numberOfBonusTracks==1?"Singular":"Plural")).replace("#n", numberOfBonusTracks);
-					let texts = [];
+					let titles = [];
 					for (let i = album.songs.length-numberOfBonusTracks; i < album.songs.length; i++) {
-						texts.push(localizer.getExplicit("quoteLeft") + formatSongTitle(album.songs[i]) + localizer.getExplicit("quoteRight"));
+						titles.push(Talktalk.wrapInQuotes(
+							Talktalk.wrapInDirectionalMarkers(
+								formatSongTitle(album.songs[i])
+							, "ltr")
+						));
 					}
-					if (localizer.noSpaces[language]) texts = texts.map(x => "\u200b"+x);
-					if (localizer.rtl[language]) texts = texts.map(x => "<span dir=\"ltr\" style=\"display: inline-block;\">"+x+"</span>"); //wow
-					p.innerHTML += new Intl.ListFormat(languageFull, {type: "conjunction"}).format(texts);
-					p.style.fontSize = "0.875rem";
-					p.style.lineHeight = "1rem";
-					if (localizer.rtl[language]) p.setAttribute("dir", "rtl");
+					p.innerText = Talktalk.talk("bonustrackstatement", {n: numberOfBonusTracks, list: titles});
 				}
 			}
 			events.push({
 				released: album.released,
 				element: table
-			});
-		}
-		for (let year = 2016; true; year++) {
-			if (new Date(year+"-12-05 ").getTime() > new Date().getTime()) break;
-			let element = document.createElement("div");
-			element.setAttribute("class", "birthday");
-			element.appendChild(document.createElement("span")).innerText = "🎉 My " + ordinal(year-2004) + " birthday";
-			element.appendChild(document.createElement("hr"));
-			events.push({
-				released: year+"-12-05",
-				element: element
 			});
 		}
 		for (let event of events.sort((a,b)=>a.released>b.released?-1:1)) {
@@ -766,8 +766,10 @@
 			img.src = entry.artwork.replace("_10", "_4");
 			let info = div.appendChild(document.createElement("div"));
 			info.setAttribute("class", "info");
-			localizer.formatDate(info.appendChild(document.createElement("span")), entry.released);
-			info.appendChild(document.createElement("div")).innerText = entry.title;
+			info.appendChild(document.createElement("span")).innerText = Talktalk.talk(releasedStringToDate(entry.released));
+			let titleSpace = info.appendChild(document.createElement("div"));
+			titleSpace.innerText = entry.title;
+			titleSpace.dir = "ltr";
 		}
 	</script>
 </body>

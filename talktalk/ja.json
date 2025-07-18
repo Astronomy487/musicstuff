@@ -1,0 +1,21 @@
+{
+	"date:year": "numeric",
+	"date:month": "short",
+	"date:day": "numeric",
+	"duration:style": "narrow",
+	"mynameis": "私の名前はAstroです\nこれは私の音楽です",
+	"mymusic": "私の音楽",
+	"mymusiccomment": "Bandcamp にて 16bit/44.1kHz のロスレス音源をすべて無料でダウンロード可能\nすべての楽曲は CC BY-NC-SA 4.0 ライセンスのもとで共有",
+	"othermusic": "私が関わった他の音楽で、ぜひ聴いてほしいもの",
+	"returntocatalogue": "カタログに戻る",
+	"lyrics": "歌詞",
+	"samples": "サンプル",
+	"mixtracklist": "ミックストラックリスト",
+	"bonustrackstatement": {
+		"singular": "ボーナストラックがBandcampのダウンロードで入手できます：%{list}",
+		"plural": "%{n}のボーナストラックがBandcampのダウンロードで入手できます：%{list}"
+	},
+	"trackcount": "%{n}曲",
+	"albummembershipbonus": "%{album}のボーナストラック",
+	"albummembership": "%{album}の%{n}曲目"
+}

@@ -1,0 +1,4 @@
+{
+	"indicator": "%{x}",
+	"forceLanguageWithQueryParameter": "lang"
+}
