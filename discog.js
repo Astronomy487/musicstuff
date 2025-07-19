@@ -1,4 +1,56 @@
 let discog = {
+	"singles": [
+		/* {
+			"title": "Unstuck",
+			"length": 257,
+			"artwork": "https://f4.bcbits.com/img/a0072336795_10.jpg",
+			"released": "2025-07-18",
+			"url": {
+				"YouTube": "https://www.youtube.com/watch?v=wG3JAav1kVg",
+				"Bandcamp": "https://astronomy487.bandcamp.com/track/unstuck",
+				"Soundcloud": "https://soundcloud.com/astronomy487/unstuck"
+			},
+			"color": {"fg": "#F5E3BF", "bg": "#1C1210", "acc": "#F5E3BF"},
+			"songs": [
+				{"title": "Unstuck", "length": 257, "lyrics": "Like a whisper of wind, she was kind and ever-giving\nLetting everyone in, but you never start forgetting\nThat as soon as they come to her, they leave her behind\nOnly he had the nerve to go and change her mind\n\nAnd he had seen her before, why would this be any different?\nGot caught up in a sandstorm and couldn't beat the currents\nSo he spun himself in circles till he hit the wall\nEveryone said that pride comes before the fall\n\nHe'll come unstuck from the world around him\nGive it a month till the new one's found him\nIf he gets on his feet again, he'll see the other side\nFigure out why he's here in the first place\nSee something new that he hates in the worst case\nAt least he'll know that there's someone there for him\n\nNow he's a pain in her sides with a million tons of baggage\nEven if they're alive, we don't know if she can manage\nWith the world watching over her holding their breath\nAs he's stuck in the middle staring straight at death\n\nBut if you look for a moment at the million shades of color\nIn the sparkling ocean, waiting just to know her\nWith the world watching over him biting their tongue\nTill they say, \"Why'd you do that? You're not the only one\"\n\nHe'll come unstuck from the world around him\nGive it a month till the new one's found him\nIf he gets on his feet again, he'll see the other side\nFigure out why he's here in the first place\nSee something new that he hates in the worst case\nAt least he'll know that there's someone there for him\n\nFour years later, you're on my mind again\nCan't stop thinking about the six days we spent together\nNowhere to run except into your arms, I said,\n\"I can't leave 'cause I want this to last forever\"\nFour years later, it's on my mind again\nKick me out and scream,\n\"I can't do another day here stuck with you\"\nIt kills me how everyone laughed at me\nBut you wouldn't know how that feels"}
+			]
+		},
+		{
+			"title": "That's as Far as You Can Go (feat. Spencer Raymond)",
+			"length": 324,
+			"artwork": "https://f4.bcbits.com/img/a0072336795_10.jpg",
+			"released": "2025-07-04",
+			"url": {
+				"YouTube": "https://www.youtube.com/watch?v=UOz0eKSjkUY",
+				"Bandcamp": "https://astronomy487.bandcamp.com/track/thats-as-far-as-you-can-go-feat-spencer-raymond",
+				"Soundcloud": "https://soundcloud.com/astronomy487/thats-as-far-as-you-can-go-feat-spencer-raymond"
+			},
+			"color": {"fg": "#F5E3BF", "bg": "#1C1210", "acc": "#F5E3BF"},
+			"songs": [
+				{"title": "That's as Far as You Can Go (feat. Spencer Raymond)", "length": 324, "lyrics": "Look to the sun, feel her light reach your skin right\nBreathe in the air, it's all yours to explore\nStare at the sea, with ships cascading\nNow you're wanting more\n\nPierce to the heart 'cause there's nobody else here\nNumberless charms, people all feel the same\nBeacon of hope, sail down the waters\nPut it in her name\n\n'Cause you're worth it, sunshine, go out in the world\nWith your perfect torchlight, just let it all burn\n'Cause they'll thank you later, and everything's free\nIn a thousand years, you could smolder the earth\nOr ignite and watch them get what they deserve\nNo, they'll thank you later when everything's free\nWander till you die\n\nScared of the dark, she can guide you to fortune\nTrust in her word, say your prayers to the sky\nKindle a flame and see her progress\nVirtue on your side\n\n'Cause you're worth it, sunshine, go out in the world\nWith your perfect torchlight, just let it all burn\n'Cause they'll thank you later, and everything's free\nIn a thousand years, you could smolder the earth\nOr ignite and watch them get what they deserve\nNo, they'll thank you later when everything's free\nWander till you die\n\nNo they can't keep their minds off you\nYour love lights up an empty night\nMother Earth has her eyes on you\nThe journey forever inspired\nYou can feel it now\nAnd remember how her smile would make you feel\nBut it's raining down\nOh it's over now\nStill you're here, still you're here\n\nIf you took ten years just to pick yourself up\nThen I can't imagine the pain that you felt\nWhen you reached the coast, staring straight at the sun\nIf you look behind you, you'll see what you missed:\nThere's a million people, but everyone's pissed \nThat the sky's on fire, and you can't admit\nThat's as far as you can go\nThat's as far as you can go"}
+			]
+		}, */
+		{
+			"artist": "REY GWEN, Astro",
+			"title": "ROSALIE",
+			"length": 180,
+			"artwork": "https://f4.bcbits.com/img/a1268335900_10.jpg",
+			"released": "2023-08-25",
+			"url": {
+				"Apple Music": "https://music.apple.com/us/album/rosalie-single/1702512075",
+				"Bandcamp": "https://astronomy487.bandcamp.com/album/rosalie",
+				"YouTube": "https://www.youtube.com/watch?v=41wUnNB4HQM",
+				"Soundcloud": "https://soundcloud.com/reygwen/rosalie",
+				"Spotify": "https://open.spotify.com/album/7qfjQSsv1Hk31WEA1xVPYx"
+			},
+			"color": {"fg": "#FEFEFE", "bg": "#181925", "acc": "#FF3A44"},
+			"about": "This is a pop song that I produced and Rey wrote!",
+			"songs": [
+				{"artist": "REY GWEN, Astro", "title": "ROSALIE", "length": 180, "lyrics": "There's a story I'm dreading but I have to face\nI'll taste the sun on your tongue, it captivates me\nYour heart beats in rhythm with the pouring rain\nI'll never forget how you made me feel that summer day\nYou'll eat your words so hard, your calcium wears down\nYou hate the way they're so perfect, and you hate this town\nShe's everything you've wanted and I think it's time\nEverything would be perfect if I made you mine\n\nI was begging for kisses, now you give me them for free\nI think I'm in love with you, Rosalie\nThere's not a better time to tell you what you do to me\nI think I'm in love with you, Rosalie\n\n2 a.m., your eyes shine like the full moon\nI look into them and I see all of you\nYou're so perfect, I think I want to die\nI'm gonna hold you close like the pen I use to write\nLove letters, put them on your windshield\nA pretty dance in a strawberry field\nA Polaroid kiss you'd see in the movies\nI'll dream of this still and I'll let it consume me\n\nI was begging for kisses, now you give me them for free\nI think I'm in love with you, Rosalie\nThere's not a better time to tell you what you do to me\nI think I'm in love with you, Rosalie"},
+				{"bonus": true, "artist": "REY GWEN, Astro", "title": "ROSALIE (Instrumental)", "length": 180}
+			]
+		}
+	],
 	"albums": [
 		{
 			"title": "Chase an Idea",
@@ -689,9 +741,7 @@ let discog = {
 				{"title": "The Sunrise", "length": 260, "url": {"Apple Music": "https://music.apple.com/us/album/1730264942?i=1730265138", "YouTube": "https://www.youtube.com/watch?v=JAFQnHj4npw", "Bandcamp": "https://astronomy487.bandcamp.com/track/the-sunrise", "Spotify": "https://open.spotify.com/track/58j2IzgpCW77Vt8oRrkJT8"}},
 				{"title": "Handsome", "length": 202, "url": {"Apple Music": "https://music.apple.com/us/album/1730264942?i=1730265139", "YouTube": "https://www.youtube.com/watch?v=Y-2_Ge4mH4M", "Bandcamp": "https://astronomy487.bandcamp.com/track/handsome", "Spotify": "https://open.spotify.com/track/2KCRAwpcRyfRVJNb3KjhBD"}},
 				{"title": "winter nights : sweet dreams", "length": 484, "url": {"Apple Music": "https://music.apple.com/us/album/1730264942?i=1730265140", "YouTube": "https://www.youtube.com/watch?v=dVOpFx9kdJk", "Bandcamp": "https://astronomy487.bandcamp.com/track/winter-nights-sweet-dreams", "Spotify": "https://open.spotify.com/track/4rEq5XlFJBIWZgZ2gOEGDA"}},
-				{"bonus": true, "title": "winter nights : sweet dreams (Unabridged)", "length": 763},
-				{"bonus": true, "artist": "REY GWEN, Astro", "title": "ROSALIE", "length": 180, "artwork": "https://f4.bcbits.com/img/a2749484521_10.jpg", "released": "2023-08-25", "lyrics": "There's a story I'm dreading but I have to face\nI'll taste the sun on your tongue, it captivates me\nYour heart beats in rhythm with the pouring rain\nI'll never forget how you made me feel that summer day\nYou'll eat your words so hard, your calcium wears down\nYou hate the way they're so perfect, and you hate this town\nShe's everything you've wanted and I think it's time\nEverything would be perfect if I made you mine\n\nI was begging for kisses, now you give me them for free\nI think I'm in love with you, Rosalie\nThere's not a better time to tell you what you do to me\nI think I'm in love with you, Rosalie\n\n2 a.m., your eyes shine like the full moon\nI look into them and I see all of you\nYou're so perfect, I think I want to die\nI'm gonna hold you close like the pen I use to write\nLove letters, put them on your windshield\nA pretty dance in a strawberry field\nA Polaroid kiss you'd see in the movies\nI'll dream of this still and I'll let it consume me\n\nI was begging for kisses, now you give me them for free\nI think I'm in love with you, Rosalie\nThere's not a better time to tell you what you do to me\nI think I'm in love with you, Rosalie", "url": {"Apple Music": "https://music.apple.com/us/album/rosalie-single/1702512075", "YouTube": "https://www.youtube.com/watch?v=41wUnNB4HQM", "Soundcloud": "https://soundcloud.com/reygwen/rosalie", "Spotify": "https://open.spotify.com/album/7qfjQSsv1Hk31WEA1xVPYx"}, "color": {"fg": "#FEFEFE", "bg": "#181925", "acc": "#FF3A44"}},
-				{"bonus": true, "artist": "REY GWEN, Astro", "title": "ROSALIE (Instrumental)", "length": 180, "artwork": "https://f4.bcbits.com/img/a2749484521_10.jpg", "color": {"fg": "#FEFEFE", "bg": "#181925", "acc": "#FF3A44"}}
+				{"bonus": true, "title": "winter nights : sweet dreams (Unabridged)", "length": 763}
 			],
 			"about": "Mint Gum is a mix of songs I've been working on over the past two years that don't really have a home on any of the more conceptual albums I've been working on. I'm naturally hesitant to share details (I like to be surprising!) but, during 2023, I really got in my own head about releasing music altogether. I kept looking back at past albums with fascination and admiration, as if someone else entirely had put them together. I spent the entire year working on and obsessing over my next album album, wanting so badly to make the best set of songs imaginable. Of course, that obsession and self-imposed pressure can be both helpful and unhelpful.\n\nThose songs are probably still on their way, but as I bide my time, I put together this lighthearted collection of songs that have been loitering on my hard drive for too long! Some of them are outtakes from that 2023 album (\"unicorn\", \"ok girl !\", \"Endless V\", \"bitter taste\", and \"Handsome\"), a few were tossed around as collaborations between Rey and I before we chose \"ROSALIE\" (\"Andromeda Galaxy\", \"Hydrogen\", and \"Bézier Curve\"), and the rest are songs made for specific events, and album concepts that went nowhere. And \"winter nights : sweet dreams\" was the first song I made for somewhere in the milky way! Wow!"
 		},

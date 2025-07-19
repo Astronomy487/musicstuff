@@ -19,6 +19,7 @@
 		"singular": "%{n} track",
 		"plural": "%{n} tracks"
 	},
+	"single": "Single",
 	"albummembershipbonus": "Bonus track on %{album}",
 	"albummembership": "Track %{n} on %{album}"
 }

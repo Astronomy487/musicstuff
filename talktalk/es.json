@@ -19,6 +19,7 @@
 		"singular": "%{n} pista",
 		"plural": "%{n} pistas"
 	},
+	"single": "Sencillo",
 	"albummembershipbonus": "Pista extra en %{album}",
 	"albummembership": "Pista %{n} en %{album}"
 }

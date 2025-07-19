@@ -109,7 +109,7 @@
 		.tracklist-container {
 			margin: 1rem 0;
 		}
-		.album-tile .additional-message {
+		.additional-message {
 			color: var(--med);
 			font-size: 0.875rem;
 			line-height: 1rem;
@@ -131,20 +131,17 @@
 			color: var(--med);
 			margin-inline-start: 0.5rem;
 		}
-		.single-tile, .album-tile {
+		.album-tile, .single-tile {
 			margin: 6rem 0;
 		}
-		.single-tile img {
-			width: 6rem;
-			height: 6rem;
+		.single-tile td:first-child img {
+			width: 10rem;
+			height: 10rem;
 			display: inline-block;
 		}
-		.single-tile > div {
-			display: inline-block;
-			background: #030;
-			color: var(--med);
-			margin-inline-start: 0.5rem;
-			vertical-align: top;
+		.single-tile h2 {
+			margin-bottom: 1rem;
+			font-size: 1.5rem;
 		}
 		h2 {
 			margin: 0;
@@ -180,17 +177,9 @@
 		.lyrics p:first-letter {
 			margin-inline-start: -1rem;
 		}
-		a[href] {
-			color: var(--link1);
-		}
-		a[href]:hover {
-			color: var(--link2);
-		}
-		a {
-			cursor: pointer;
-		}
 		a:hover {
 			text-decoration: underline;
+			cursor: pointer;
 		}
 		@keyframes nav-hover {
 			0% {scale: 1.25;}
@@ -328,23 +317,49 @@
 			return event;
 		}
 		
-		function addSingleEvent(song) {
-			let div = document.createElement("div");
-			div.setAttribute("class", "single-tile");
+		function addSingleEvent(single) {
+			let table = document.createElement("table");
+			table.setAttribute("class", "single-tile");
+			let tr = table.appendChild(document.createElement("tr"));
 			
-			let artwork = song.artwork;
-			if (!artwork) for (let album of discog.albums) if (album.songs.includes(song)) artwork = album.artwork;
-			let img = div.appendChild(document.createElement("img"));
-			img.src = artwork;
+			let artwork = single.artwork;
+			let leftSide = tr.appendChild(document.createElement("td"));
+			leftSide.style.width = "12rem";
+			let img = leftSide.appendChild(document.createElement("img"));
+			img.src = artwork.replace("_10", "_4");
 			
-			let info = div.appendChild(document.createElement("div"));
-			let title = info.appendChild(document.createElement("div"));
+			let info = tr.appendChild(document.createElement("td"));
+			
+			let date = info.appendChild(document.createElement("span"));
+			date.style.float = "inline-end";
+			date.style.color = "var(--med)";
+			date.innerText = Talktalk.talk(releasedStringToDate(single.released));
+			
+			let title = info.appendChild(document.createElement("h2")).appendChild(document.createElement("a"));
 			title.style.color = "var(--fg)";
-			setTextWithParentheses(title, song);
+			setTextWithParentheses(title, single.songs[0]);
+			
+			info.appendChild(navFromUrls(single.url));
+			
+			let h4 = leftSide.appendChild(document.createElement("h4"));
+			h4.appendChild(document.createElement("span")).innerText = Talktalk.talk("single");
+			h4.querySelector("span").style.marginInlineEnd = "1rem";
+			h4.appendChild(document.createElement("span")).innerText = Talktalk.duration(single.length).talk();
+			
+			if (single.about) {
+				let about = single.about.split("\n\n");
+				for (let paragraph of about) {
+					let p = info.appendChild(document.createElement("p"));
+					p.innerText = smartquotes(paragraph);
+					p.dir = "ltr";
+				}
+			}
+			
+			maybeMakeBonusTrackStatement(single, info);
 			
 			let event = {
-				released: song.released,
-				element: div
+				released: single.released,
+				element: table
 			};
 			events.push(event);
 			return event;
@@ -359,7 +374,7 @@
 			lastInspected = song;
 			document.querySelector("main").style.insetInlineStart = "calc(50% - 32rem - 17rem)";
 			inspectTransitioningRightNow = true;
-			let album = discog.albums.filter(x => x.songs.includes(song));
+			let album = discog.albums.concat(discog.singles).filter(x => x.songs.includes(song));
 			album = album.length ? album[0] : null;
 			let div = document.querySelector(".inspect > div");
 			div.style.animation = "0.2s inspect-out";
@@ -499,13 +514,11 @@
 			}, 190);
 		}
 		
-		for (let remix of discog.remixes) {
-			addSimpleEvent(remix);
-		}
+		for (let remix of discog.remixes) addSimpleEvent(remix);
+		for (let single of discog.singles) addSingleEvent(single);
 		for (let album of discog.albums) for (let song of album.songs) if (song.released && (song.released < album.released)) {
 			if (["Utopian", "Exosphere"].includes(album.title)) continue;
 			if (["Chase an Idea", "Emerge"].includes(album.title)) addSimpleEvent(song);
-			//else if (song.title == "ROSALIE") addSingleEvent(song);
 			else addSimpleEvent(song);
 		}
 		
@@ -582,21 +595,7 @@
 					for (let i = Math.ceil(c/numberOfColumns*numberOfSongsToDisplay); i < (c+1)/numberOfColumns*numberOfSongsToDisplay; i++) doTracklistItem(tracklists[c], i);
 				}
 				
-				let numberOfBonusTracks = album.songs.filter(x => x.bonus).length;
-				if (numberOfBonusTracks) {
-					let p = td.appendChild(document.createElement("p"));
-					p.setAttribute("class", "additional-message");
-					
-					let titles = [];
-					for (let i = album.songs.length-numberOfBonusTracks; i < album.songs.length; i++) {
-						titles.push(Talktalk.wrapInQuotes(
-							Talktalk.wrapInDirectionalMarkers(
-								formatSongTitle(album.songs[i])
-							, "ltr")
-						));
-					}
-					p.innerText = Talktalk.talk("bonustrackstatement", {n: numberOfBonusTracks, list: titles});
-				}
+				maybeMakeBonusTrackStatement(album, td);
 			}
 			events.push({
 				released: album.released,
@@ -605,6 +604,24 @@
 		}
 		for (let event of events.sort((a,b)=>a.released>b.released?-1:1)) {
 			output.appendChild(event.element);
+		}
+		
+		function maybeMakeBonusTrackStatement(album, parentElement) { //album may also be single
+			let numberOfBonusTracks = album.songs.filter(x => x.bonus).length;
+			if (numberOfBonusTracks) {
+				let p = parentElement.appendChild(document.createElement("p"));
+				p.setAttribute("class", "additional-message");
+				
+				let titles = [];
+				for (let i = album.songs.length-numberOfBonusTracks; i < album.songs.length; i++) {
+					titles.push(Talktalk.wrapInQuotes(
+						Talktalk.wrapInDirectionalMarkers(
+							formatSongTitle(album.songs[i])
+						, "ltr")
+					));
+				}
+				p.innerText = Talktalk.talk("bonustrackstatement", {n: numberOfBonusTracks, list: titles});
+			}
 		}
 		
 		

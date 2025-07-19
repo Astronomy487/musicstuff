@@ -16,6 +16,7 @@
 		"plural": "%{n}のボーナストラックがBandcampのダウンロードで入手できます：%{list}"
 	},
 	"trackcount": "%{n}曲",
+	"single": "シングル",
 	"albummembershipbonus": "%{album}のボーナストラック",
 	"albummembership": "%{album}の%{n}曲目"
 }

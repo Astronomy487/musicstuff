@@ -13,9 +13,10 @@
 	"mixtracklist": "Mix-Trackliste",
 	"bonustrackstatement": {
 		"singular": "Bonus-Track zum Download auf Bandcamp verfügbar: %{list}",
-		"plural": "#n Bonus-Tracks zum Download auf Bandcamp verfügbar:  %{list}"
+		"plural": "%{n} Bonus-Tracks zum Download auf Bandcamp verfügbar:  %{list}"
 	},
 	"trackcount": "%{n} Titel",
+	"single": "Single",
 	"albummembershipbonus": "Bonustrack auf %{album}",
 	"albummembership": "Titel %{n} von %{album}"
 }

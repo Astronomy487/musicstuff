@@ -4,6 +4,7 @@ https://music.astronomy487.com/discog.js is a big json record of every song i've
 
 - `discog.albums`, an array of Albums i've released
 - `discog.remixes`, an array of Songs, each being a remix i have released (i.e. based on someone else's music)
+- `discog.singles`, an array of singles i've released. behaves the same as Albums, really (just that the title and length of the 'album' will match the title and length of the first track, and all subsequent tracks will be marked as bonus)
 
 for each of the types below, all fields are optional unless marked as required.
 

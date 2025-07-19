@@ -19,6 +19,7 @@
 		"singular": "%{n} titre",
 		"plural": "%{n} titres"
 	},
+	"single": "Single",
 	"albummembershipbonus": "Titre bonus de l’album %{album}",
 	"albummembership": "Titre %{n} de l’album %{album}"
 }
